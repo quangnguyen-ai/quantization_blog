@@ -1,0 +1,71 @@
+<svg width="1100" height="340" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main diagram box -->
+  <rect x="10" y="50" width="1080" height="235" fill="none" stroke="#7f8c8d" stroke-width="2" rx="12"/>
+
+  <!-- Activation_in box (FP32) -->
+  <rect x="30" y="70" width="140" height="50" fill="#ecf0f1" stroke="#3498db" stroke-width="2" rx="6"/>
+  <text x="100" y="90" text-anchor="middle" fill="#3498db" font-family="Courier New" font-size="16" font-weight="bold">Activation_in</text>
+  <text x="100" y="108" text-anchor="middle" fill="#3498db" font-family="Courier New" font-size="15">(FP32)</text>
+  <!-- Arrow from Activation_in box to Quantize -->
+  <line x1="170" y1="95" x2="210" y2="95" stroke="#3498db" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
+
+  <!-- Quantize box -->
+  <rect x="210" y="70" width="110" height="50" fill="#d6eaf8" stroke="#3498db" stroke-width="2" rx="6"/>
+  <text x="265" y="93" text-anchor="middle" fill="#2e86c1" font-family="Arial" font-size="16" font-weight="bold">Quantize</text>
+  <text x="265" y="110" text-anchor="middle" fill="#2874a6" font-family="Courier New" font-size="13" font-style="italic">Q<tspan baseline-shift="sub" font-size="10">x</tspan>(x)</text>
+
+  <!-- Weight box (FP32) -->
+  <rect x="30" y="145" width="140" height="50" fill="#ecf0f1" stroke="#9b59b6" stroke-width="2" rx="6"/>
+  <text x="100" y="165" text-anchor="middle" fill="#9b59b6" font-family="Courier New" font-size="16" font-weight="bold">Weight</text>
+  <text x="100" y="183" text-anchor="middle" fill="#9b59b6" font-family="Courier New" font-size="15">(FP32)</text>
+
+  <!-- Arrow from Quantize to Multiply -->
+  <line x1="320" y1="95" x2="380" y2="95" stroke="#3498db" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
+
+  <!-- Arrow from Weight to Multiply -->
+  <line x1="170" y1="170" x2="380" y2="170" stroke="#9b59b6" stroke-width="2" marker-end="url(#arrowhead-purple)"/>
+
+  <!-- Multiply box -->
+  <rect x="380" y="70" width="120" height="120" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2" rx="8"/>
+  <text x="440" y="115" text-anchor="middle" fill="#2c3e50" font-family="Arial" font-size="18" font-weight="bold">Multiply</text>
+  <text x="440" y="138" text-anchor="middle" fill="#7f8c8d" font-family="Courier New" font-size="15" font-style="italic">FP32</text>
+   <text x="440" y="153" text-anchor="middle" fill="#7f8c8d" font-family="Courier New" font-size="15" font-style="italic">W × Q⁻¹(x<tspan baseline-shift="sub" font-size="12">q</tspan>)</text>
+
+  <!-- + bias -->
+  <line x1="500" y1="130" x2="580" y2="130" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="580" y="105" width="100" height="50" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2" rx="6"/>
+  <text x="630" y="138" text-anchor="middle" fill="#9b59b6" font-family="Courier New" font-size="20" font-weight="bold">⊕ b</text>
+
+  <!-- Activation f(.) -->
+  <line x1="680" y1="130" x2="760" y2="130" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <circle cx="810" cy="130" r="40" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2"/>
+  <text x="810" y="138" text-anchor="middle" fill="#2c3e50" font-family="Arial" font-size="22" font-weight="bold">f(.)</text>
+
+  <!-- Activation_out -->
+  <line x1="850" y1="130" x2="930" y2="130" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="930" y="105" width="140" height="50" fill="#ecf0f1" stroke="#e74c3c" stroke-width="2" rx="6"/>
+  <text x="1000" y="125" text-anchor="middle" fill="#e74c3c" font-family="Courier New" font-size="16" font-weight="bold">Activation_out</text>
+  <text x="1000" y="143" text-anchor="middle" fill="#e74c3c" font-family="Courier New" font-size="15">(FP32)</text>
+
+  <!-- Formula -->
+  <text x="550" y="250" text-anchor="middle" fill="#1a5276" font-family="Courier New" font-size="24" font-weight="bold">
+    y = f(W × Q<tspan baseline-shift="sub" font-size="18">x</tspan>⁻¹(x<tspan baseline-shift="sub" font-size="18">q</tspan>) + b)
+  </text>
+  <text x="550" y="275" text-anchor="middle" fill="#7f8c8d" font-family="Arial" font-size="14" font-style="italic">Activation quantized, weight in FP32</text>
+
+  <!-- Title -->
+  <text x="550" y="320" text-anchor="middle" fill="#2c3e50" font-family="Arial" font-size="18" font-weight="bold">Figure: Activation Quantization (Activations INT8, Weights FP32)</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#2c3e50"/>
+    </marker>
+    <marker id="arrowhead-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#3498db"/>
+    </marker>
+    <marker id="arrowhead-purple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#9b59b6"/>
+    </marker>
+  </defs>
+</svg>

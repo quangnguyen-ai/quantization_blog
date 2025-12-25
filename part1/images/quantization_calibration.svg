@@ -1,0 +1,34 @@
+<svg width="1000" height="240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Box around formulas -->
+  <rect x="30" y="20" width="940" height="110" fill="none" stroke="#7f8c8d" stroke-width="2" rx="10"/>
+
+  <!-- Formula 1: Scale -->
+  <text x="500" y="55" text-anchor="middle" fill="#1a5276" font-family="Courier New" font-size="24" font-weight="bold">
+    s = (x<tspan baseline-shift="sub" font-size="18">max</tspan> - x<tspan baseline-shift="sub" font-size="18">min</tspan>) / (q<tspan baseline-shift="sub" font-size="18">max</tspan> - q<tspan baseline-shift="sub" font-size="18">min</tspan>)
+  </text>
+
+  <!-- Formula 2: Zero-point with therefore -->
+  <text x="150" y="105" text-anchor="start" fill="#e74c3c" font-family="Arial" font-size="20" font-style="italic">therefore:</text>
+  <text x="300" y="105" text-anchor="start" fill="#1a5276" font-family="Courier New" font-size="24" font-weight="bold">
+    z = round(q<tspan baseline-shift="sub" font-size="18">min</tspan> - x<tspan baseline-shift="sub" font-size="18">min</tspan> / s)
+  </text>
+
+  <!-- Variable explanations -->
+  <g id="variables">
+    <circle cx="120" cy="160" r="5" fill="#3498db"/>
+    <text x="135" y="165" fill="#3498db" font-family="Courier New" font-size="20" font-weight="bold">
+      x<tspan baseline-shift="sub" font-size="15">min</tspan>, x<tspan baseline-shift="sub" font-size="15">max</tspan>:
+    </text>
+    <text x="300" y="165" fill="#2c3e50" font-family="Arial" font-size="18">FP32 value range</text>
+
+    <circle cx="520" cy="160" r="5" fill="#9b59b6"/>
+    <text x="535" y="165" fill="#9b59b6" font-family="Courier New" font-size="20" font-weight="bold">
+      q<tspan baseline-shift="sub" font-size="15">min</tspan>, q<tspan baseline-shift="sub" font-size="15">max</tspan>:
+    </text>
+    <text x="710" y="165" fill="#2c3e50" font-family="Arial" font-size="18">[-128, 127] for INT8</text>
+  </g>
+
+  <!-- Title at bottom -->
+  <text x="500" y="205" text-anchor="middle" fill="#2c3e50" font-family="Arial" font-size="18" font-weight="bold">Figure: Min-Max Calibration Formulas</text>
+  <text x="500" y="227" text-anchor="middle" fill="#7f8c8d" font-family="Arial" font-size="14" font-style="italic">Scale factor and zero-point calculation for asymmetric quantization</text>
+</svg>

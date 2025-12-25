@@ -1,0 +1,70 @@
+<svg width="1100" height="320" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main diagram box -->
+  <rect x="10" y="50" width="1000" height="210" fill="none" stroke="#7f8c8d" stroke-width="2" rx="12"/>
+
+  <!-- Activation_in box (FP32) -->
+  <rect x="30" y="70" width="140" height="50" fill="#ecf0f1" stroke="#3498db" stroke-width="2" rx="6"/>
+  <text x="100" y="90" text-anchor="middle" fill="#3498db" font-family="Courier New" font-size="16" font-weight="bold">Activation_in</text>
+  <text x="100" y="108" text-anchor="middle" fill="#3498db" font-family="Courier New" font-size="15">(FP32)</text>
+
+  <!-- Weight box (FP32) -->
+  <rect x="30" y="145" width="140" height="50" fill="#ecf0f1" stroke="#9b59b6" stroke-width="2" rx="6"/>
+  <text x="100" y="165" text-anchor="middle" fill="#9b59b6" font-family="Courier New" font-size="16" font-weight="bold">Weight</text>
+  <text x="100" y="183" text-anchor="middle" fill="#9b59b6" font-family="Courier New" font-size="15">(FP32)</text>
+
+  <!-- Arrow from Activation_in to Multiply -->
+  <line x1="170" y1="95" x2="250" y2="95" stroke="#3498db" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
+
+  <!-- Arrow from Weight to Multiply -->
+  <line x1="170" y1="170" x2="250" y2="170" stroke="#9b59b6" stroke-width="2" marker-end="url(#arrowhead-purple)"/>
+
+  <!-- Multiply box (taller to accept 2 inputs) -->
+  <rect x="250" y="70" width="120" height="120" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2" rx="8"/>
+  <text x="310" y="125" text-anchor="middle" fill="#2c3e50" font-family="Arial" font-size="18" font-weight="bold">Multiply</text>
+  <text x="310" y="148" text-anchor="middle" fill="#7f8c8d" font-family="Courier New" font-size="16" font-style="italic">W × x</text>
+
+  <!-- Arrow to + bias -->
+  <line x1="370" y1="130" x2="450" y2="130" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- + bias box -->
+  <rect x="450" y="105" width="100" height="50" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2" rx="6"/>
+  <text x="500" y="138" text-anchor="middle" fill="#9b59b6" font-family="Courier New" font-size="20" font-weight="bold">⊕ b</text>
+
+  <!-- Arrow to f(.) -->
+  <line x1="550" y1="130" x2="640" y2="130" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Activation function f(.) -->
+  <circle cx="690" cy="130" r="40" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2"/>
+  <text x="690" y="138" text-anchor="middle" fill="#2c3e50" font-family="Arial" font-size="22" font-weight="bold">f(.)</text>
+
+  <!-- Annotation for activation function -->
+  <text x="690" y="195" text-anchor="middle" fill="#7f8c8d" font-family="Arial" font-size="14" font-style="italic">Activation function</text>
+  <text x="690" y="212" text-anchor="middle" fill="#7f8c8d" font-family="Arial" font-size="13" font-style="italic">(ReLU, Sigmoid, etc.)</text>
+
+  <!-- Arrow to Activation_out -->
+  <line x1="730" y1="130" x2="830" y2="130" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Activation_out box (FP32) -->
+  <rect x="835" y="105" width="150" height="50" fill="#ecf0f1" stroke="#e74c3c" stroke-width="2" rx="6"/>
+  <text x="910" y="125" text-anchor="middle" fill="#e74c3c" font-family="Courier New" font-size="16" font-weight="bold">Activation_out</text>
+  <text x="910" y="143" text-anchor="middle" fill="#e74c3c" font-family="Courier New" font-size="15">(FP32)</text>
+
+  <!-- Mathematical Formula -->
+  <text x="550" y="250" text-anchor="middle" fill="#1a5276" font-family="Courier New" font-size="26" font-weight="bold">y = f(W × x + b)</text>
+
+  <!-- Title at bottom -->
+  <text x="550" y="295" text-anchor="middle" fill="#2c3e50" font-family="Arial" font-size="18" font-weight="bold">Figure: Neural Network Forward Pass Computation</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#2c3e50"/>
+    </marker>
+    <marker id="arrowhead-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#3498db"/>
+    </marker>
+    <marker id="arrowhead-purple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#9b59b6"/>
+    </marker>
+  </defs>
+</svg>

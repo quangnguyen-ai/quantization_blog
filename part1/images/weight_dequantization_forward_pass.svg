@@ -1,0 +1,89 @@
+<svg width="1100" height="340" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main diagram box -->
+  <rect x="10" y="50" width="1060" height="235" fill="none" stroke="#7f8c8d" stroke-width="2" rx="12"/>
+
+  <!-- Activation_in box (FP32) -->
+  <rect x="30" y="70" width="140" height="50" fill="#ecf0f1" stroke="#3498db" stroke-width="2" rx="6"/>
+  <text x="100" y="90" text-anchor="middle" fill="#3498db" font-family="Courier New" font-size="16" font-weight="bold">Activation_in</text>
+  <text x="100" y="108" text-anchor="middle" fill="#3498db" font-family="Courier New" font-size="15">(FP32)</text>
+
+  <!-- Weight box (INT8) -->
+  <rect x="30" y="145" width="140" height="50" fill="#ecf0f1" stroke="#9b59b6" stroke-width="2" rx="6"/>
+  <text x="100" y="165" text-anchor="middle" fill="#9b59b6" font-family="Courier New" font-size="16" font-weight="bold">Weight</text>
+  <text x="100" y="183" text-anchor="middle" fill="#9b59b6" font-family="Courier New" font-size="15">(INT8/INT4)</text>
+
+  <!-- Arrow from Activation_in to Multiply -->
+  <line x1="170" y1="95" x2="360" y2="95" stroke="#3498db" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
+
+  <!-- Arrow from Weight to Dequantize -->
+  <line x1="170" y1="170" x2="210" y2="170" stroke="#9b59b6" stroke-width="2" marker-end="url(#arrowhead-purple)"/>
+
+  <!-- Dequantize box -->
+  <rect x="210" y="145" width="110" height="50" fill="#fff3cd" stroke="#f39c12" stroke-width="2" rx="6"/>
+  <text x="265" y="168" text-anchor="middle" fill="#f39c12" font-family="Arial" font-size="16" font-weight="bold">Dequantize</text>
+  <text x="265" y="185" text-anchor="middle" fill="#d68910" font-family="Courier New" font-size="13" font-style="italic">Q⁻¹(w<tspan baseline-shift="sub" font-size="10">q</tspan>)</text>
+
+  <!-- Arrow from Dequantize to Multiply -->
+  <line x1="320" y1="170" x2="360" y2="170" stroke="#f39c12" stroke-width="2" marker-end="url(#arrowhead-orange)"/>
+
+  <!-- Multiply box (taller to accept 2 inputs) -->
+  <rect x="360" y="70" width="120" height="120" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2" rx="8"/>
+  <text x="420" y="115" text-anchor="middle" fill="#2c3e50" font-family="Arial" font-size="18" font-weight="bold">Multiply</text>
+  <text x="420" y="138" text-anchor="middle" fill="#2c3e50" font-family="Courier New" font-size="16" font-style="italic">FP32</text>
+  <text x="420" y="158" text-anchor="middle" fill="#7f8c8d" font-family="Courier New" font-size="15" font-style="italic">Q⁻¹(w<tspan baseline-shift="sub" font-size="12">q</tspan>) × x</text>
+
+  <!-- Arrow to + bias -->
+  <line x1="480" y1="130" x2="560" y2="130" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- + bias box -->
+  <rect x="560" y="105" width="100" height="50" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2" rx="6"/>
+  <text x="610" y="138" text-anchor="middle" fill="#9b59b6" font-family="Courier New" font-size="20" font-weight="bold">⊕ b</text>
+
+  <!-- Arrow to f(.) -->
+  <line x1="660" y1="130" x2="750" y2="130" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Activation function f(.) -->
+  <circle cx="800" cy="130" r="40" fill="#ecf0f1" stroke="#2c3e50" stroke-width="2"/>
+  <text x="800" y="138" text-anchor="middle" fill="#2c3e50" font-family="Arial" font-size="22" font-weight="bold">f(.)</text>
+
+  <!-- Annotation for activation function -->
+  <text x="800" y="195" text-anchor="middle" fill="#7f8c8d" font-family="Arial" font-size="14" font-style="italic">Activation function</text>
+  <text x="800" y="212" text-anchor="middle" fill="#7f8c8d" font-family="Arial" font-size="13" font-style="italic">(ReLU, Sigmoid, etc.)</text>
+
+  <!-- Arrow to Activation_out -->
+  <line x1="840" y1="130" x2="900" y2="130" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Activation_out box (FP32) -->
+  <rect x="900" y="105" width="150" height="50" fill="#ecf0f1" stroke="#e74c3c" stroke-width="2" rx="6"/>
+  <text x="975" y="125" text-anchor="middle" fill="#e74c3c" font-family="Courier New" font-size="16" font-weight="bold">Activation_out</text>
+  <text x="975" y="143" text-anchor="middle" fill="#e74c3c" font-family="Courier New" font-size="15">(FP32)</text>
+
+  <!-- Mathematical Formula -->
+  <text x="510" y="250" text-anchor="middle" fill="#1a5276" font-family="Courier New" font-size="24" font-weight="bold">
+    y = f(Q<tspan baseline-shift="sub" font-size="18">w</tspan>⁻¹(w<tspan baseline-shift="sub" font-size="18">q</tspan>) × x + b)
+  </text>
+
+  <!-- Formula explanation -->
+  <text x="510" y="275" text-anchor="middle" fill="#7f8c8d" font-family="Arial" font-size="14" font-style="italic">
+    where w<tspan baseline-shift="sub" font-size="11">q</tspan> is INT8/INT4 weight, Q<tspan baseline-shift="sub" font-size="11">w</tspan>⁻¹ is weight dequantization function
+  </text>
+
+  <!-- Title at bottom -->
+  <text x="560" y="320" text-anchor="middle" fill="#2c3e50" font-family="Arial" font-size="18" font-weight="bold">Figure: Forward Pass with Weight Dequantization</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#2c3e50"/>
+    </marker>
+    <marker id="arrowhead-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#3498db"/>
+    </marker>
+    <marker id="arrowhead-purple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#9b59b6"/>
+    </marker>
+    <marker id="arrowhead-orange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#f39c12"/>
+    </marker>
+  </defs>
+</svg>

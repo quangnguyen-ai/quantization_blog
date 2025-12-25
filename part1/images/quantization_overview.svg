@@ -1,0 +1,72 @@
+<svg width="1200" height="420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fpGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="intGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <!-- Arrowhead -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto">
+      <polygon points="0 0, 10 5, 0 10" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- FP32 continuous representation -->
+  <rect x="50" y="70" width="360" height="80" fill="url(#fpGradient)" rx="25"/>
+  <text x="230" y="115" text-anchor="middle" fill="white" font-family="Arial" font-size="20" font-weight="bold">FP32 weight/bias</text>
+
+  <!-- Arrow -->
+  <path d="M 420 110 L 780 110" stroke="#333" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <!-- Formula emphasized (lowered a bit) -->
+  <text x="600" y="150" text-anchor="middle" fill="#1a5276" font-family="Courier New" font-size="24" font-weight="bold">q = round(x / s + z)</text>
+  <text x="600" y="180" text-anchor="middle" fill="#333" font-family="Arial" font-size="14">Quantization</text>
+
+  <!-- INT8 discrete representation -->
+  <g>
+    <rect x="850" y="70" width="50" height="80" fill="url(#intGradient)" rx="10"/>
+    <rect x="910" y="70" width="50" height="80" fill="url(#intGradient)" rx="10"/>
+    <rect x="970" y="70" width="50" height="80" fill="url(#intGradient)" rx="10"/>
+    <text x="1030" y="105" fill="#333" font-family="Arial" font-size="18">...</text>
+    <rect x="1070" y="70" width="50" height="80" fill="url(#intGradient)" rx="10"/>
+    <text x="970" y="180" text-anchor="middle" fill="#333" font-family="Arial" font-size="18" font-weight="bold">INT8 weight/bias (256 values)</text>
+  </g>
+
+  <!-- Memory reduction annotation -->
+  <text x="230" y="220" text-anchor="middle" fill="#e74c3c" font-family="Arial" font-size="20" font-weight="bold">32 bits → 8 bits</text>
+  <text x="230" y="245" text-anchor="middle" fill="#e74c3c" font-family="Arial" font-size="16">75% Memory Reduction</text>
+
+  <text x="970" y="220" text-anchor="middle" fill="#27ae60" font-family="Arial" font-size="20" font-weight="bold">4x Faster</text>
+  <text x="970" y="245" text-anchor="middle" fill="#27ae60" font-family="Arial" font-size="16">INT8 Operations</text>
+
+  <!-- Simple variable explanations - 2x2 layout -->
+  <g id="simpleVariables">
+    <!-- Left column -->
+    <!-- Variable x -->
+    <circle cx="250" cy="295" r="10" fill="#3498db"/>
+    <text x="275" y="302" fill="#3498db" font-family="Courier New" font-size="20" font-weight="bold">x</text>
+    <text x="300" y="282" fill="#2c3e50" font-family="Arial" font-size="18">= Original FP32 value</text>
+    
+    <!-- Variable q -->
+    <circle cx="250" cy="325" r="10" fill="#9b59b6"/>
+    <text x="275" y="332" fill="#9b59b6" font-family="Courier New" font-size="22" font-weight="bold">q</text>
+    <text x="300" y="332" fill="#2c3e50" font-family="Arial" font-size="18">= Quantized INT8 value</text>
+    
+    <!-- Right column -->
+    <!-- Variable s -->
+    <circle cx="650" cy="295" r="10" fill="#e74c3c"/>
+    <text x="675" y="302" fill="#e74c3c" font-family="Courier New" font-size="22" font-weight="bold">s</text>
+    <text x="700" y="302" fill="#2c3e50" font-family="Arial" font-size="18">= Scale factor (step size)</text>
+    
+    <!-- Variable z -->
+    <circle cx="650" cy="325" r="10" fill="#e67e22"/>
+    <text x="675" y="332" fill="#e67e22" font-family="Courier New" font-size="20" font-weight="bold">z</text>
+    <text x="700" y="332" fill="#2c3e50" font-family="Arial" font-size="18">= Zero-point (integer offset)</text>
+  </g>
+
+  <!-- Title at bottom -->
+  <text x="600" y="375" text-anchor="middle" fill="#2c3e50" font-family="Arial" font-size="20" font-weight="bold">Figure: Quantization Process Overview</text>
+  <text x="600" y="400" text-anchor="middle" fill="#7f8c8d" font-family="Arial" font-size="14" font-style="italic">Converting continuous FP32 values to discrete INT8 representation with significant memory and speed improvements</text>
+</svg>

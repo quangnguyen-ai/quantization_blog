@@ -1,0 +1,74 @@
+<svg width="1000" height="480" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#34495e"/>
+    </marker>
+  </defs>
+
+  <!-- Input Tensor -->
+  <text x="500" y="30" text-anchor="middle" fill="#2c3e50" font-family="Arial" font-size="18" font-weight="bold">Input Tensor (FP32)</text>
+  <rect x="200" y="40" width="600" height="50" fill="#ecf0f1" stroke="#95a5a6" stroke-width="2" rx="5"/>
+  <text x="500" y="72" text-anchor="middle" fill="#2c3e50" font-family="Courier New" font-size="16" font-weight="bold">[-0.3, 0.1, 0.5, -0.2, 0.8]</text>
+
+  <!-- Step 1: Find Range -->
+  <rect x="50" y="120" width="400" height="70" fill="#fff5f5" stroke="#e74c3c" stroke-width="2" rx="8"/>
+  <text x="250" y="145" text-anchor="middle" fill="#c0392b" font-family="Arial" font-size="16" font-weight="bold">Step 1: Find Range</text>
+  <text x="250" y="170" text-anchor="middle" fill="#2c3e50" font-family="Courier New" font-size="14">x_min = -0.3,  x_max = 0.8</text>
+
+  <!-- Step 2: Calculate Parameters -->
+  <rect x="550" y="120" width="400" height="70" fill="#f0f8ff" stroke="#3498db" stroke-width="2" rx="8"/>
+  <text x="750" y="145" text-anchor="middle" fill="#2980b9" font-family="Arial" font-size="16" font-weight="bold">Step 2: Calculate s and z</text>
+  <text x="750" y="165" text-anchor="middle" fill="#2c3e50" font-family="Courier New" font-size="13">s = (0.8 - (-0.3)) / (127 - (-128)) ≈ 0.0043</text>
+  <text x="750" y="182" text-anchor="middle" fill="#2c3e50" font-family="Courier New" font-size="13">z = round(-128 - (-0.3) / 0.0043) ≈ -58</text>
+
+  <!-- Step 3: Apply Quantization -->
+  <rect x="50" y="220" width="900" height="100" fill="#f9f9f9" stroke="#7f8c8d" stroke-width="2" rx="8"/>
+  <text x="500" y="245" text-anchor="middle" fill="#34495e" font-family="Arial" font-size="16" font-weight="bold">Step 3: Apply Formula  q = round(x / s + z)</text>
+
+  <!-- Quantization examples -->
+  <g transform="translate(100, 260)">
+    <!-- Value 1 -->
+    <circle cx="40" cy="25" r="18" fill="#e74c3c"/>
+    <text x="40" y="30" text-anchor="middle" fill="white" font-family="Courier New" font-size="11" font-weight="bold">-0.3</text>
+    <path d="M 65 25 L 105 25" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrow)"/>
+    <circle cx="130" cy="25" r="18" fill="#3498db"/>
+    <text x="130" y="30" text-anchor="middle" fill="white" font-family="Courier New" font-size="11" font-weight="bold">-128</text>
+
+    <!-- Value 2 -->
+    <circle cx="200" cy="25" r="18" fill="#e74c3c"/>
+    <text x="200" y="30" text-anchor="middle" fill="white" font-family="Courier New" font-size="11" font-weight="bold">0.1</text>
+    <path d="M 225 25 L 265 25" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrow)"/>
+    <circle cx="290" cy="25" r="18" fill="#3498db"/>
+    <text x="290" y="30" text-anchor="middle" fill="white" font-family="Courier New" font-size="12" font-weight="bold">-35</text>
+
+    <!-- Value 3 -->
+    <circle cx="360" cy="25" r="18" fill="#e74c3c"/>
+    <text x="360" y="30" text-anchor="middle" fill="white" font-family="Courier New" font-size="11" font-weight="bold">0.5</text>
+    <path d="M 385 25 L 425 25" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrow)"/>
+    <circle cx="450" cy="25" r="18" fill="#3498db"/>
+    <text x="450" y="30" text-anchor="middle" fill="white" font-family="Courier New" font-size="12" font-weight="bold">58</text>
+
+    <!-- Value 4 -->
+    <circle cx="520" cy="25" r="18" fill="#e74c3c"/>
+    <text x="520" y="30" text-anchor="middle" fill="white" font-family="Courier New" font-size="11" font-weight="bold">-0.2</text>
+    <path d="M 545 25 L 585 25" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrow)"/>
+    <circle cx="610" cy="25" r="18" fill="#3498db"/>
+    <text x="610" y="30" text-anchor="middle" fill="white" font-family="Courier New" font-size="11" font-weight="bold">-104</text>
+
+    <!-- Value 5 -->
+    <circle cx="680" cy="25" r="18" fill="#e74c3c"/>
+    <text x="680" y="30" text-anchor="middle" fill="white" font-family="Courier New" font-size="11" font-weight="bold">0.8</text>
+    <path d="M 705 25 L 745 25" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrow)"/>
+    <circle cx="770" cy="25" r="18" fill="#3498db"/>
+    <text x="770" y="30" text-anchor="middle" fill="white" font-family="Courier New" font-size="12" font-weight="bold">127</text>
+  </g>
+
+  <!-- Output Result -->
+  <text x="500" y="350" text-anchor="middle" fill="#2c3e50" font-family="Arial" font-size="18" font-weight="bold">Output Tensor (INT8)</text>
+  <rect x="200" y="360" width="600" height="50" fill="#d5f4e6" stroke="#27ae60" stroke-width="2" rx="5"/>
+  <text x="500" y="392" text-anchor="middle" fill="#27ae60" font-family="Courier New" font-size="16" font-weight="bold">[0, 93, 186, 24, 127]</text>
+
+  <!-- Title at bottom -->
+  <text x="500" y="440" text-anchor="middle" fill="#2c3e50" font-family="Arial" font-size="20" font-weight="bold">Figure: Quantization Example - FP32 to INT8 Conversion</text>
+  <text x="500" y="465" text-anchor="middle" fill="#7f8c8d" font-family="Arial" font-size="14" font-style="italic">Each floating-point value is mapped to its corresponding integer representation using scale and zero-point</text>
+</svg>
